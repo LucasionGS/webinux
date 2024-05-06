@@ -7,6 +7,7 @@ import IoncoreLoader from "./components/IoncoreLoader/IoncoreLoader"
 import UserApi from "./Api/UserApi"
 import BaseApi from "./Api/BaseApi"
 import ErrorPage from "./pages/Error/Error"
+import HomePage from "./pages/Home/Home";
 
 function requirement(opts: {
   admin?: boolean,
@@ -52,37 +53,22 @@ function requirement(opts: {
   }
 }
 
-const pages: Route[] = [
-  {
-    path: /^\/$/,
-    title: "Home",
-    component: async () => {
-      const HomePage = (await import("./pages/Home/Home")).default;
-      return <HomePage />
-    },
-  },
-  {
-    path: /^\/login$/,
-    title: "Login",
-    component: async () => {
-      const LoginPage = (await import("./pages/Login/Login")).default;
-      return <LoginPage />
-    },
-  },
-  requirement({ permission: "DASHBOARD_VIEW" }, {
-    path: /^\/admin(\/|$)/,
-    title: "Admin",
-    component: async () => {
-      const AdminPage = (await import("./pages/Admin/Admin")).default;
-      return <AdminPage />
-    },
-  }),
-]
+// const pages: Route[] = [
+//   {
+//     path: /^\/$/,
+//     title: "Home",
+//     component: async () => {
+//       const HomePage = (await import("./pages/Home/Home")).default;
+//       return <HomePage />
+//     },
+//   }
+// ];
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <IoncoreProvider theme={{ scheme: "dark" }}>
-      <Router pages={pages} loadingPage={() => <IoncoreLoader centered />} errorPage={ErrorPage} />
+      {/* <Router pages={pages} loadingPage={() => <IoncoreLoader centered />} errorPage={ErrorPage} /> */}
+      <HomePage />
     </IoncoreProvider>
   </React.StrictMode>,
 );
